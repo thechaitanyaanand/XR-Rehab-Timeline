@@ -170,71 +170,104 @@
                 phaseId: "research",
                 events: [
                     {
-                        dateRange: "July 16 – July 31, 2025",
-                        title: "Research Planning & Preparations",
+                        dateRange: "July 16 – July 25, 2025",
+                        title: "Protocol Finalization & Preparations",
                         outcomes: [
-                            { owner: "Team", task: "Finalize Research Questions & Protocol: Define primary goals and measurable outcomes." },
-                            { owner: "Team", task: "Ethical & Administrative Approvals: Prepare and submit IRB/ethics application; collect consent forms, patient information sheets, data‐use agreements." },
-                            { owner: "Team", task: "Instrumentation & Tools: Create data‐collection templates (in‐game log parser, clinical assessment forms, post‐session questionnaire)." },
-                            { owner: "Team", task: "Participant Recruitment Strategy: Draft recruitment flyer/announcement, identify potential patient pool." },
-                            { owner: "Team", task: "Team Training: Run a dry‐run session, assign roles for data collection." }
+                            { owner: "Team", task: "Research Protocol Complete: Define evaluation questions: “Does MR CTS gameplay elicit appropriate therapeutic movements?” and “How do experts rate its clinical fidelity?”" },
+                            { owner: "Team", task: "Select measurable metrics: in‐game accuracy, simulated ROM targets, pain‐proxy questionnaires." },
+                            { owner: "Team", task: "Ethics & Approvals: Submit IRB/ethics application (if required for expert observation)." },
+                            { owner: "Team", task: "Prepare consent/assent documents for expert participants." },
+                            { owner: "Team", task: "Data‐Collection Tools Ready: Finalize in‐game logging (CSV: timestamp, gesture, accuracy)." },
+                            { owner: "Team", task: "Create “expert rating” form (Likert scale for movement quality, safety, clinical relevance)." },
+                            { owner: "Team", task: "Dry‐Run with Researchers: Conduct a mock session with team members playing “expert” role: run through one tutorial + exercise wave." },
+                            { owner: "Team", task: "Verify all data logs and rating forms function correctly." }
+                        ]
+                    },
+                    {
+                        dateRange: "July 25 – July 30, 2025",
+                        title: "Pilot Study (Experts)",
+                        outcomes: [
+                            { owner: "Team", task: "Conduct Pilot Sessions with 3–5 Experts: Invite surgeons/orthopedists/physiotherapists to test the game for 1–2 sessions each." },
+                            { owner: "Team", task: "Collect in‐game logs (accuracy, reps) and expert ratings immediately post‐session." },
+                            { owner: "Team", task: "Tool Refinement: Merge and clean pilot data: ensure logs align with rating timestamps." },
+                            { owner: "Team", task: "Revise rating form language or in‐game prompts if experts note confusion." },
+                            { owner: "Team", task: "Preliminary Observations: Tabulate expert scores and comment summaries (e.g., “Wrist rotation feels realistic,” “Pinch threshold too strict”)." },
+                            { owner: "Team", task: "Hold team debrief to finalize metrics and adjust any game calibration." }
                         ]
                     },
                     {
                         dateRange: "August 1 – August 15, 2025",
-                        title: "Pilot Data Collection (N≈5 CTS Patients)",
+                        title: "Full Expert Evaluation",
                         outcomes: [
-                            { owner: "Team", task: "Execute Pilot Sessions: Recruit 5 CTS patients for initial pilot (two weeks, 2 sessions/week). Collect in‐game logs, pre/post clinical measures, post‐session questionnaires." },
-                            { owner: "Team", task: "Data Management & Cleaning: Consolidate logs, check for inconsistencies, enter clinical measures." },
-                            { owner: "Team", task: "Preliminary Analysis & Feedback Loop: Compute basic metrics, identify issues, hold team debrief to refine protocols." }
+                            { owner: "Team", task: "Recruit 10–12 Experts: Schedule each for three gameplay sessions over two weeks (to observe learning/progression)." },
+                            { owner: "Team", task: "Provide standardized instructions: warm-up, three waves of increasing difficulty, rating after each wave." },
+                            { owner: "Team", task: "Data Collection per Session: Gameplay Logs: {expertID, session#, timestamp, gestureType, achievedAccuracy}" },
+                            { owner: "Team", task: "Expert Rating Forms: For each wave, rate “Movement Fidelity,” “Therapeutic Value,” “Safety Concerns” (Likert 1–7); collect free‐text comments." },
+                            { owner: "Team", task: "Aggregate & Tag Data: Tag logs and ratings by session and expertID." },
+                            { owner: "Team", task: "Compute per‐session aggregates: MeanAccuracy_expert_session, MeanRating_expert_session (average of relevant Likert items)." },
+                            { owner: "Team", task: "Note any outliers or missing entries; follow up if needed." }
                         ]
                     },
                     {
-                        dateRange: "August 16 – August 31, 2025",
-                        title: "Full Data Collection (N≈20 CTS Patients)",
-                        outcomes: [
-                            { owner: "Team", task: "Scale Up Recruitment & Testing: Recruit additional 15 CTS patients (total N≈20). Schedule 8 sessions over 4 weeks (2 sessions/week). Continue data collection protocol." },
-                            { owner: "Team", task: "Ongoing Data Monitoring: Weekly data‐quality checks, spot‐check logs." },
-                            { owner: "Team", task: "Begin Data Organization for Analysis: Tag data, start computing session‐level aggregates (ΔAccuracy, ΔROM)." }
-                        ]
-                    },
-                    {
-                        dateRange: "September 1 – September 4, 2025",
+                        dateRange: "August 16 – August 20, 2025",
                         title: "Data Analysis & Abstract Draft",
                         outcomes: [
-                            { owner: "Team", task: "Statistical Analysis (Preliminary): Run tests (t‐tests/Wilcoxon), correlate in‐game vs. clinical improvements, summarize pain reduction." },
-                            { owner: "Team", task: "Abstract & Metadata Draft: Write 250-word abstract (Background, Methods, Results, Conclusions). Prepare metadata (keywords, authors, etc.)." },
-                            { owner: "Team", task: "Internal Review: Circulate abstract and tables for edits. Finalize by end of day Sept 4." }
+                            { owner: "Team", task: "Statistical Analysis: Calculate overall accuracy improvement across sessions (e.g., Session 1 vs. Session 3)." },
+                            { owner: "Team", task: "Correlate average in‐game accuracy with expert “Movement Fidelity” ratings (Pearson or Spearman)." },
+                            { owner: "Team", task: "Summarize expert feedback qualitatively (common themes)." },
+                            { owner: "Team", task: "CHI Abstract Draft: Background: CTS rehab challenges & MR potential." },
+                            { owner: "Team", task: "Methods: Expert evaluation design (N≈10, 3 sessions each, metrics)." },
+                            { owner: "Team", task: "Results: “Mean accuracy increased from 0.65 to 0.85 (p<0.01). Movement Fidelity rated 5.8/7 on average.”" },
+                            { owner: "Team", task: "Conclusions: Feasibility and expert‐endorsed therapeutic value." },
+                            { owner: "Team", task: "Internal Review & Revision: Circulate abstract and key tables/figures (accuracy trend, rating correlations) for team feedback." },
+                            { owner: "Team", task: "Finalize abstract text and prepare metadata (authors, keywords, contributions)." }
+                        ]
+                    },
+                    {
+                        dateRange: "August 21 – August 30, 2025",
+                        title: "Full Paper Writing",
+                        outcomes: [
+                            { owner: "Team", task: "Draft Sections: Introduction & Related Work (Sambhav + Prajwal): MR rehab literature, CTS specifics." },
+                            { owner: "Team", task: "Methods (Chaitanya + Sambhav): Game design, MR setup, expert evaluation protocol, metrics." },
+                            { owner: "Team", task: "Results (Chaitanya): Statistical tables/figures—accuracy by session, rating distributions, correlation plots." },
+                            { owner: "Team", task: "Discussion (Prajwal + Sambhav): Interpretation, expert suggestions, limitations." },
+                            { owner: "Team", task: "Create Figures & Tables: Line plot: average accuracy across three sessions." },
+                            { owner: "Team", task: "Bar chart: average “Movement Fidelity” ratings per session." },
+                            { owner: "Team", task: "Table: demographics of expert cohort (specialty, years of experience)." },
+                            { owner: "Team", task: "In‐Text Citations & References: Add ACM‐formatted references for MR frameworks, CTS clinical guidelines, expert evaluation methods." }
+                        ]
+                    },
+                    {
+                        dateRange: "August 31, 2025",
+                        title: "Internal Reviews & Final Revisions",
+                        outcomes: [
+                            { owner: "Team", task: "Team Peer Review: Full read‐through of manuscript; annotate for clarity, completeness, and coherence." },
+                            { owner: "Team", task: "Address any methodological or reporting gaps." },
+                            { owner: "Team", task: "Formatting & Proofreading: Ensure ACM SIGCHI template compliance." },
+                            { owner: "Team", task: "Check figures/tables captions, citations, appendices." },
+                            { owner: "Team", task: "Final language edit (grammar, consistency, abbreviations)." }
                         ]
                     },
                     {
                         dateRange: "September 5, 2025 (AoE)",
-                        title: "Abstract Submission to CHI",
+                        title: "CHI Abstract Submission",
                         isSubmission: true,
                         outcomes: [
-                            { owner: "Team", task: "Abstract & metadata submitted to CHI." }
+                            { owner: "Team", task: "Submit finalized abstract and metadata to CHI by AoE." }
                         ]
                     },
                     {
-                        dateRange: "September 6 – September 10, 2025",
-                        title: "Full Paper Writing",
+                        dateRange: "September 6 – September 11, 2025",
+                        title: "Post‐Abstract Edits & Final Checks",
                         outcomes: [
-                            { owner: "Team", task: "Paper Outline & Section Assignments: Introduction & Related Work (Sambhav + Prajwal), Methods (Chaitanya + Sambhav), Results (Chaitanya), Discussion & Limitations (Prajwal + Sambhav), Conclusion & Future Work (Team)." },
-                            { owner: "Team", task: "Figure/Table Creation: Produce key figures (accuracy chart, ROM graph, usability summary) and tables (demographics, summary statistics)." },
-                            { owner: "Team", task: "Draft Sections: Write full text for Introduction, Methods, and Results. Include citations in ACM format." }
-                        ]
-                    },
-                    {
-                        dateRange: "September 11, 2025",
-                        title: "Internal Reviews & Revisions",
-                        outcomes: [
-                            { owner: "Team", task: "Peer‐Review Within Team: Each member reads full draft, annotates comments. Hold meeting to resolve major issues." },
-                            { owner: "Team", task: "Copyediting & Formatting: Finalize reference list, ensure ACM SIGCHI template compliance. Check figures, tables, citations. Final language proofread." }
+                            { owner: "Team", task: "Post‐Submission Adjustments: Address any feedback from co‐authors; minor tweaks to paper if new insights surfaced during abstract review." },
+                            { owner: "Team", task: "Final Validation: Confirm all data presented matches the latest analysis." },
+                            { owner: "Team", task: "Double‐check reference list and author affiliations." }
                         ]
                     },
                     {
                         dateRange: "September 12, 2025 (AoE)",
-                        title: "Full Paper Submission to CHI",
+                        title: "CHI Full Paper Submission",
                         isSubmission: true,
                         outcomes: [
                             { owner: "Team", task: "Submit complete CHI paper." }
@@ -317,7 +350,7 @@
                 }
                 timelineContainer.appendChild(phaseSection);
             });
-             attachToggleListeners();
+            attachToggleListeners();
         }
 
 
@@ -331,7 +364,7 @@
                 const ownerClass = getOwnerClass(outcome.owner);
                 let ownerPrefix = `<span class="owner-tag ${ownerClass}">${outcome.owner}</span>`;
                 if (outcome.taskType) {
-                     ownerPrefix = `<span class="owner-tag ${ownerClass}">${outcome.owner} (${outcome.taskType})</span>`;
+                    ownerPrefix = `<span class="owner-tag ${ownerClass}">${outcome.owner} (${outcome.taskType})</span>`;
                 }
                 outcomesHtml += `<li class="leading-relaxed">${ownerPrefix}${outcome.task}</li>`;
             });
@@ -395,4 +428,3 @@
     </script>
 </body>
 </html>
-```
