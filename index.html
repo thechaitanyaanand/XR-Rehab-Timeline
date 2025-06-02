@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Timeline: MR CTS Rehab Game & Research</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Tailwind gray-100 */
+        }
+        .timeline-item-content {
+            max-height: 0;
+            overflow: hidden;
+            /* Removed padding from transition to ensure accurate scrollHeight calculation */
+            transition: max-height 0.5s ease-in-out;
+        }
+        .timeline-item-content.expanded {
+            /* max-height will be set by JS based on content */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .timeline-line {
+            width: 4px;
+            background-color: #cbd5e0; /* Tailwind gray-400 */
+        }
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background-color: #4a5568; /* Tailwind gray-700 */
+            border: 3px solid #f7fafc; /* Tailwind gray-100 for contrast with line */
+        }
+        .owner-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px; /* pill shape */
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 600; /* semibold */
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .sambhav-tag { background-color: #ebf8ff; color: #3182ce; /* blue-100, blue-600 */}
+        .chaitanya-tag { background-color: #f0fff4; color: #38a169; /* green-100, green-600 */}
+        .prajwal-tag { background-color: #fffff0; color: #d69e2e; /* yellow-100, yellow-600 */}
+        .team-tag { background-color: #faf5ff; color: #805ad5; /* purple-100, purple-600 */}
+        .sidetask-tag { background-color: #ebf4ff; color: #5a67d8; /* indigo-100, indigo-600 */}
+        .deliverable-card {
+            border-left: 4px solid #48bb78; /* green-500 */
+        }
+        .submission-card {
+            border-left: 4px solid #f56565; /* red-500 */
+        }
+        .latex-formula {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+        }
+        /* Chevron animation */
+        .chevron-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .expanded .chevron-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <header class="text-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-700">Project Timeline</h1>
+            <p class="text-lg text-gray-600 mt-2">MR CTS Rehab Game Development & Research Phases</p>
+        </header>
+
+        <div id="timelineContainer" class="space-y-16">
+            </div>
+    </div>
+
+    <script>
+        const timelineData = [
+            {
+                phaseTitle: "Game Development Phase",
+                phaseId: "game-dev",
+                events: [
+                    {
+                        dateRange: "June 3 – June 9, 2025",
+                        title: "Desired Outcomes (by June 9): Initial Setup & Concepts",
+                        outcomes: [
+                            { owner: "Sambhav", task: "Defined all CTS stretching exercises in Unity (code stubs exist)." },
+                            { owner: "Sambhav", task: "Mapped one exercise (e.g., index‐finger pinch) to a placeholder “Attack_1” event." },
+                            { owner: "Chaitanya", task: "Unity 2022.3.40f1 project created with OpenXR enabled." },
+                            { owner: "Chaitanya", task: "XR Simulator installed and configured; a basic MR scene runs in Play Mode (no headset required)." },
+                            { owner: "Prajwal", task: "Concept art + rough blockouts of: Tutorial room and main environment layout. Two enemy archetypes (“Cube‐bot” and “Spike‐drone”). Simple placeholder assets (low‐poly shapes) imported." }
+                        ]
+                    },
+                    {
+                        dateRange: "June 10 – June 16, 2025",
+                        title: "Desired Outcomes (by June 16): Core Mechanics & MR Setup",
+                        outcomes: [
+                            { owner: "Sambhav", task: "One CTS exercise’s gesture detection (pinch/grip) implemented via XR Hands." },
+                            { owner: "Sambhav", task: "Raw accuracy metric computed and linked to “Attack_1” power stub." },
+                            { owner: "Chaitanya", task: "In XR Simulator scene, spatial‐mesh capture logic (OpenXR) fetches mock room mesh." },
+                            { owner: "Chaitanya", task: "Placeholder MR walls with colliders exist (no destruction yet)." },
+                            { owner: "Prajwal", task: "Imported and placed low‐poly environment prototype into Unity." },
+                            { owner: "Prajwal", task: "Created prototype “Enemy_1” prefab with basic movement (idle → approach) and health logic." },
+                            { owner: "Sambhav & Chaitanya", taskType: "Side Task", task: "Passthrough Box / Hand‐Mesh Replacement: Basic “passthrough cube” prefab created around each palm (in MR mode). Detect when hand overlaps a destructible‐wall region (via collider). On overlap: swap hand’s passthrough view for a simple hand‐mesh. On exit: restore normal passthrough. Visible: White box (with alpha) around hands when near a wall, or a simple mesh hand appears. Backend: Hand‐wall overlap check via XRHandSubsystem joint positions + wall collider; toggle visibility of passthrough vs. mesh." }
+                        ]
+                    },
+                    {
+                        dateRange: "June 17 – June 23, 2025",
+                        title: "Desired Outcomes (by June 23): Integration & Enemy Mechanics",
+                        outcomes: [
+                            { owner: "Sambhav & Chaitanya", taskType: "Collaborative", task: "Gesture → Attack pipeline integrated into MR scene: pinching the wall in XR Simulator triggers an attack event." },
+                            { owner: "Sambhav & Chaitanya", taskType: "Collaborative", task: "Passthrough Hand Logic Finalized: Perform end‐to‐end test: a hand approaching and overlapping a destructible wall in XR Simulator toggles the passthrough cube and spawns a mesh hand. Log events: {timestamp, handPose, overlapState}." },
+                            { owner: "Chaitanya", task: "Stub “Doctor Dashboard” backend: collects {playerID, timestamp, gestureAccuracy, reps} into a JSON file." },
+                            { owner: "Prajwal", task: "Enemy_1 attack patterns implemented: Launches a slow “Projectile_1” toward player every 5 s." },
+                            { owner: "Prajwal", task: "Player defense: “Grip” gesture triggers a block shield VFX, preventing damage if timed correctly." }
+                        ]
+                    },
+                    {
+                        dateRange: "June 24 – June 30, 2025",
+                        title: "Desired Outcomes (by June 30): Exercise Expansion & Backend Dev",
+                        outcomes: [
+                            { owner: "Sambhav", task: "Added remaining CTS exercises (wrist flexion/extension, finger stretches), each mapping to a unique “Attack_Type.”" },
+                            { owner: "Sambhav", task: "Tuned rawTolerance per exercise so initial success ~ 60–70%." },
+                            { owner: "Chaitanya", task: "Adaptive difficulty module (backend) written: computes new T after each wave using a performance‐only version of the master equation." },
+                            { owner: "Chaitanya", task: "“Doctor Dashboard” MVP: Unity UI displays latest session metrics (number of sessions, average accuracy)." },
+                            { owner: "Prajwal", task: "Environment visuals refined: Textures/materials on walls and floor. Added destructible‐wall placeholders (guillotine‐style break points) without physics yet." },
+                            { owner: "Prajwal", task: "Modeled “Enemy_2” with a second attack (larger projectile, faster)." }
+                        ]
+                    },
+                    {
+                        dateRange: "July 1 – July 7, 2025",
+                        title: "Desired Outcomes (by July 7): Full Integration & Destructibles",
+                        outcomes: [
+                            { owner: "Sambhav & Chaitanya", taskType: "Collaborative", task: "Full gesture suite integrated: each “Attack_Type” uses <span class='latex-formula'>$eps = epsMax – T \\cdot (epsMax – epsMin)$</span> to evaluate hit/miss → compute attack damage." },
+                            { owner: "Sambhav & Chaitanya", taskType: "Collaborative", task: "Score data (reps, failures, accuracy) reliably sent to doctor‐dashboard backend each session." },
+                            { owner: "Sambhav & Chaitanya", taskType: "Collaborative", task: "Passthrough Hand Edge Cases Tested: Hand near partially broken wall fragments (after initial break): ensure passthrough cube toggles and mesh hand remains consistent." },
+                            { owner: "Chaitanya", task: "Destructible‐wall mechanics implemented: Using OpenXR Scene Mesh (XRSimulator), real‐time wall polygons split into submeshes on “hit.” Physics fragments spawned with explosion force." },
+                            { owner: "Chaitanya", task: "Basic leaderboard prototype: top 5 players by “Aggregate_Average_Accuracy,” displayed on doctor dashboard." },
+                            { owner: "Prajwal", task: "Enemy AI polished: Enemy_1 and Enemy_2 patrol logic, health bar UI, death animations." },
+                            { owner: "Prajwal", task: "Damage feedback: screen flash + haptic vibration (simulator‐driven) on player hit." },
+                            { owner: "Prajwal", task: "Destructible‐wall visuals: debris particle system + sound effect." }
+                        ]
+                    },
+                    {
+                        dateRange: "July 8 – July 14, 2025",
+                        title: "Desired Outcomes (by July 14): Integration Sprint & QA",
+                        outcomes: [
+                            { owner: "All", taskType: "Integration Sprint", task: "Full‐game prototype delivered: Player enters MR room with destructible walls. CTS exercises as attacks mapped to enemies; enemy attacks/dynamics fully integrated. Adaptive difficulty updates T between waves; UI displays “Next Target: XX%.” Doctor dashboard logs and visualizes real‐time metrics; leaderboard works. Basic QA: no critical bugs (gesture misfires, wall fragments clipping)." },
+                            { owner: "Sambhav", task: "Verified all exercise‐attack sequences end‐to‐end: gestures recognized, T updated, damage applied." },
+                            { owner: "Chaitanya", task: "Ensured MR destructible‐wall performance is stable on XRSimulator; documented any Quest‐2/Quest‐3 differences." },
+                            { owner: "Prajwal", task: "Final art polish: lighting tweaks, UI icons for exercises/enemies, sound effects." },
+                            { owner: "Prajwal", task: "Tutorial hints (on‐screen arrows/text guiding player through first exercise wave) implemented." }
+                        ]
+                    },
+                    {
+                        dateRange: "July 15, 2025",
+                        title: "Deliverable: Game Development Complete",
+                        isDeliverable: true,
+                        outcomes: [
+                            { owner: "Team", task: "Playable MR CTS Rehab Prototype, featuring: All 3 roles integrated: gesture‐driven attacks + enemy patterns in a mixed‐reality destructible environment. Adaptive Difficulty: dynamically recalculates accuracy target. Doctor Dashboard & Leaderboard: records and visualizes patient data. Passthrough Hand Handling: box around hands or mesh replacement when overlapping broken walls. XRSimulator Compatibility: ready for Quest‐2 prototype testing once devices available." },
+                            { owner: "Team", task: "Delivery Package: Unity project folder, executable APK (Quest‐2), plus “How to Run” guide." }
+                        ]
+                    }
+                ]
+            },
+            {
+                phaseTitle: "Research Phase",
+                phaseId: "research",
+                events: [
+                    {
+                        dateRange: "July 16 – July 31, 2025",
+                        title: "Research Planning & Preparations",
+                        outcomes: [
+                            { owner: "Team", task: "Finalize Research Questions & Protocol: Define primary goals and measurable outcomes." },
+                            { owner: "Team", task: "Ethical & Administrative Approvals: Prepare and submit IRB/ethics application; collect consent forms, patient information sheets, data‐use agreements." },
+                            { owner: "Team", task: "Instrumentation & Tools: Create data‐collection templates (in‐game log parser, clinical assessment forms, post‐session questionnaire)." },
+                            { owner: "Team", task: "Participant Recruitment Strategy: Draft recruitment flyer/announcement, identify potential patient pool." },
+                            { owner: "Team", task: "Team Training: Run a dry‐run session, assign roles for data collection." }
+                        ]
+                    },
+                    {
+                        dateRange: "August 1 – August 15, 2025",
+                        title: "Pilot Data Collection (N≈5 CTS Patients)",
+                        outcomes: [
+                            { owner: "Team", task: "Execute Pilot Sessions: Recruit 5 CTS patients for initial pilot (two weeks, 2 sessions/week). Collect in‐game logs, pre/post clinical measures, post‐session questionnaires." },
+                            { owner: "Team", task: "Data Management & Cleaning: Consolidate logs, check for inconsistencies, enter clinical measures." },
+                            { owner: "Team", task: "Preliminary Analysis & Feedback Loop: Compute basic metrics, identify issues, hold team debrief to refine protocols." }
+                        ]
+                    },
+                    {
+                        dateRange: "August 16 – August 31, 2025",
+                        title: "Full Data Collection (N≈20 CTS Patients)",
+                        outcomes: [
+                            { owner: "Team", task: "Scale Up Recruitment & Testing: Recruit additional 15 CTS patients (total N≈20). Schedule 8 sessions over 4 weeks (2 sessions/week). Continue data collection protocol." },
+                            { owner: "Team", task: "Ongoing Data Monitoring: Weekly data‐quality checks, spot‐check logs." },
+                            { owner: "Team", task: "Begin Data Organization for Analysis: Tag data, start computing session‐level aggregates (ΔAccuracy, ΔROM)." }
+                        ]
+                    },
+                    {
+                        dateRange: "September 1 – September 4, 2025",
+                        title: "Data Analysis & Abstract Draft",
+                        outcomes: [
+                            { owner: "Team", task: "Statistical Analysis (Preliminary): Run tests (t‐tests/Wilcoxon), correlate in‐game vs. clinical improvements, summarize pain reduction." },
+                            { owner: "Team", task: "Abstract & Metadata Draft: Write 250-word abstract (Background, Methods, Results, Conclusions). Prepare metadata (keywords, authors, etc.)." },
+                            { owner: "Team", task: "Internal Review: Circulate abstract and tables for edits. Finalize by end of day Sept 4." }
+                        ]
+                    },
+                    {
+                        dateRange: "September 5, 2025 (AoE)",
+                        title: "Abstract Submission to CHI",
+                        isSubmission: true,
+                        outcomes: [
+                            { owner: "Team", task: "Abstract & metadata submitted to CHI." }
+                        ]
+                    },
+                    {
+                        dateRange: "September 6 – September 10, 2025",
+                        title: "Full Paper Writing",
+                        outcomes: [
+                            { owner: "Team", task: "Paper Outline & Section Assignments: Introduction & Related Work (Sambhav + Prajwal), Methods (Chaitanya + Sambhav), Results (Chaitanya), Discussion & Limitations (Prajwal + Sambhav), Conclusion & Future Work (Team)." },
+                            { owner: "Team", task: "Figure/Table Creation: Produce key figures (accuracy chart, ROM graph, usability summary) and tables (demographics, summary statistics)." },
+                            { owner: "Team", task: "Draft Sections: Write full text for Introduction, Methods, and Results. Include citations in ACM format." }
+                        ]
+                    },
+                    {
+                        dateRange: "September 11, 2025",
+                        title: "Internal Reviews & Revisions",
+                        outcomes: [
+                            { owner: "Team", task: "Peer‐Review Within Team: Each member reads full draft, annotates comments. Hold meeting to resolve major issues." },
+                            { owner: "Team", task: "Copyediting & Formatting: Finalize reference list, ensure ACM SIGCHI template compliance. Check figures, tables, citations. Final language proofread." }
+                        ]
+                    },
+                    {
+                        dateRange: "September 12, 2025 (AoE)",
+                        title: "Full Paper Submission to CHI",
+                        isSubmission: true,
+                        outcomes: [
+                            { owner: "Team", task: "Submit complete CHI paper." }
+                        ]
+                    }
+                ],
+                notes: {
+                    title: "Notes on General Research Process:",
+                    items: [
+                        "Team Collaboration: After July 15, all three work collectively on each step—data collection, analysis, writing—without fixed subroles.",
+                        "Version Control: Use a shared Git/GitHub repo for all datasets, analysis scripts (e.g., Python or R notebooks), and LaTeX or Word document drafts.",
+                        "Data Security: Store de-identified patient data on a secured university server; manage access via permissions.",
+                        "Backup & Redundancy: Weekly backups of raw logs and clinical data.",
+                        "Contingencies: If recruitment lags, extend data collection into early September—prioritize completing at least 15 participants before abstract submission."
+                    ]
+                }
+            }
+        ];
+
+        function getOwnerClass(owner) {
+            if (!owner) return 'team-tag'; // Default
+            const lowerOwner = owner.toLowerCase();
+            if (lowerOwner.includes('sambhav') && lowerOwner.includes('chaitanya')) return 'sidetask-tag'; // Specific for combined
+            if (lowerOwner.includes('sambhav')) return 'sambhav-tag';
+            if (lowerOwner.includes('chaitanya')) return 'chaitanya-tag';
+            if (lowerOwner.includes('prajwal')) return 'prajwal-tag';
+            return 'team-tag'; // For "Team", "All", "Collaborative"
+        }
+        
+        const timelineContainer = document.getElementById('timelineContainer');
+        
+        function recreateTimelineLayout() {
+            timelineContainer.innerHTML = ''; // Clear existing content
+
+            timelineData.forEach(phase => {
+                const phaseSection = document.createElement('section');
+                phaseSection.id = phase.phaseId;
+                phaseSection.innerHTML = `<h2 class="text-2xl md:text-3xl font-semibold text-gray-700 mb-8 text-center">${phase.phaseTitle}</h2>`;
+                
+                const phaseTimelineWrapper = document.createElement('div');
+                phaseTimelineWrapper.className = 'relative pl-8'; // Padding for the line and dots
+
+                // Create the timeline line
+                const line = document.createElement('div');
+                line.className = 'timeline-line absolute left-0 top-0 h-full';
+                line.style.left = '7px'; // Position line to align with center of dots (16px dot / 2 = 8px - 4px line / 2 = 2px => 8-2 = 6. So line at 7px is fine)
+                phaseTimelineWrapper.appendChild(line);
+
+                phase.events.forEach((event, index) => {
+                    const itemWrapper = document.createElement('div');
+                    itemWrapper.className = 'relative mb-8'; // Each item is a block
+                    
+                    // Dot
+                    const dot = document.createElement('div');
+                    dot.className = 'timeline-dot rounded-full absolute top-1';
+                    // Adjust dot position to be centered on the line
+                    // Line is 4px wide, at left: 7px. Line center is 7 + 4/2 = 9px.
+                    // Dot is 16px wide. Dot left should be 9 - 16/2 = 1px.
+                    dot.style.left = '0'; // Visually aligns well with line at 7px and dot's border
+                    
+                    const cardContainer = document.createElement('div');
+                    cardContainer.innerHTML = createEventCard(event, index);
+                    
+                    itemWrapper.appendChild(dot);
+                    itemWrapper.appendChild(cardContainer);
+                    phaseTimelineWrapper.appendChild(itemWrapper);
+                });
+                phaseSection.appendChild(phaseTimelineWrapper);
+
+                if (phase.notes) {
+                    const notesSection = document.createElement('div');
+                    notesSection.className = 'mt-12 p-6 bg-gray-50 rounded-lg shadow';
+                    let notesHtml = `<h3 class="text-xl font-semibold text-gray-700 mb-4">${phase.notes.title}</h3><ul class="list-disc list-inside space-y-2 text-gray-600">`;
+                    phase.notes.items.forEach(note => {
+                        notesHtml += `<li>${note}</li>`;
+                    });
+                    notesHtml += `</ul>`;
+                    notesSection.innerHTML = notesHtml;
+                    phaseSection.appendChild(notesSection);
+                }
+                timelineContainer.appendChild(phaseSection);
+            });
+             attachToggleListeners();
+        }
+
+
+        function createEventCard(event, index) {
+            let cardClasses = "bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden";
+            if (event.isDeliverable) cardClasses += " deliverable-card";
+            if (event.isSubmission) cardClasses += " submission-card";
+
+            let outcomesHtml = '<ul class="space-y-3 text-gray-600 text-sm">';
+            event.outcomes.forEach(outcome => {
+                const ownerClass = getOwnerClass(outcome.owner);
+                let ownerPrefix = `<span class="owner-tag ${ownerClass}">${outcome.owner}</span>`;
+                if (outcome.taskType) {
+                     ownerPrefix = `<span class="owner-tag ${ownerClass}">${outcome.owner} (${outcome.taskType})</span>`;
+                }
+                outcomesHtml += `<li class="leading-relaxed">${ownerPrefix}${outcome.task}</li>`;
+            });
+            outcomesHtml += '</ul>';
+
+            // The timeline-item-content div already has px-4 md:px-6 for horizontal padding from the initial design.
+            // The .expanded class adds vertical padding.
+            return `
+                <div class="${cardClasses}">
+                    <button class="w-full p-4 md:p-6 text-left focus:outline-none timeline-item-header">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-xs font-semibold text-indigo-600 uppercase tracking-wider">${event.dateRange}</p>
+                                <h3 class="text-md md:text-lg font-semibold text-gray-800 mt-1">${event.title}</h3>
+                            </div>
+                            <svg class="chevron-icon w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </button>
+                    <div class="timeline-item-content px-4 md:px-6">
+                        ${outcomesHtml}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function attachToggleListeners() {
+            const headers = document.querySelectorAll('.timeline-item-header');
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const isExpanded = content.classList.contains('expanded');
+                    
+                    const currentPhaseSection = header.closest('section');
+                    if (currentPhaseSection) {
+                        currentPhaseSection.querySelectorAll('.timeline-item-content.expanded').forEach(openContent => {
+                            if (openContent !== content) {
+                                openContent.style.maxHeight = '0';
+                                openContent.classList.remove('expanded');
+                                // Also update the chevron on other headers
+                                openContent.parentElement.querySelector('.timeline-item-header').classList.remove('expanded');
+                            }
+                        });
+                    }
+
+                    if (isExpanded) {
+                        content.style.maxHeight = '0';
+                        content.classList.remove('expanded');
+                        header.classList.remove('expanded'); // For chevron
+                    } else {
+                        content.classList.add('expanded');
+                        header.classList.add('expanded'); // For chevron
+                        content.style.maxHeight = content.scrollHeight + "px"; 
+                    }
+                });
+            });
+        }
+        
+        // Initial layout generation
+        recreateTimelineLayout();
+
+    </script>
+</body>
+</html>
+```
